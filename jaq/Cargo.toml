@@ -29,3 +29,4 @@ mimalloc = { version = "0.1.29", default-features = false, optional = true }
 tempfile = "3.3.0"
 unicode-width = "0.1.13"
 yansi = "1.0.1"
+viu = "1.5.1"
