@@ -1,5 +1,6 @@
 use jaq_json::Val;
 use base64::{engine::general_purpose, Engine as _};
+use viu::print_from_memory;
 
 pub fn is_image(value: &Val) -> bool {
     // Check if the value is a string
@@ -21,6 +22,21 @@ pub fn is_image(value: &Val) -> bool {
     false
 }
 
-pub fn print_image_with_sixel(_value: &Val) {
-    println!("# SIXEL TO BE IMPLEMENTED");
+pub fn print_image_with_sixel(value: &Val) {
+    if let Val::Str(s) = value {
+        // Attempt to decode from base64
+        match general_purpose::STANDARD.decode(s.as_bytes()) {
+            Ok(decoded) => {
+                match print_from_memory(&decoded, &Default::default()) {
+                    Ok(_) => (),
+                    Err(e) => eprintln!("Failed to display image: {}", e),
+                }
+            }
+            Err(_) => {
+                eprintln!("Invalid base64 or non-image data.");
+            }
+        }
+    } else {
+        eprintln!("Value is not a string.");
+    }
 }
