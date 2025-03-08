@@ -123,7 +123,7 @@ impl Cli {
             "help" => self.short('h', args)?,
 
             "img" => {
-                let value = args.next().ok_or(Error::Flag("--img"))?;
+                let value = args.next().ok_or(Error::Flag("--img".to_string()))?;
                 if value == "auto" {
                     self.img_auto = true;
                 } else {
