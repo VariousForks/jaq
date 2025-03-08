@@ -459,7 +459,7 @@ where
 
 fn fmt_val(f: &mut Formatter, opts: &PpOpts, level: usize, v: &Val) -> fmt::Result {
     use yansi::Paint;
-    if opts.img_auto && is_image(v) {
+    if opts.img_auto && matches!(v, Val::Str(_)) && is_image(v) {
         writeln!(f, "key:")?;
         print_image_with_sixel(v);
         return Ok(());
