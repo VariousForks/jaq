@@ -3,7 +3,9 @@ use base64::{engine::general_purpose, Engine as _};
 // We need to read from memory and guess the image format to support multiple formats
 use std::io::Cursor;
 use image::io::Reader as ImageReader;
-use viuer::{print, Config};
+use viuer::{print_from_file, Config};
+use std::fs::File;
+use std::io::Write;
 
 /// Checks if the provided `value` is a string containing valid base64 data and guessable image format.
 /// If it can be decoded and recognized by the `image` crate, we return `true`.
@@ -59,6 +61,13 @@ pub fn print_image_with_sixel(value: &Val) {
                     }
                 };
 
+                // Write the image to a temporary file
+                let temp_file_path = "/tmp/temp_image.png";
+                if let Err(e) = img.save(temp_file_path) {
+                    eprintln!("Failed to save image to file: {}", e);
+                    return;
+                }
+
                 // Configure `viuer`. Setting `use_sixel` to `true` tries to display
                 // with Sixel if the terminal supports it. `viuer` can also automatically
                 // detect other capabilities like Kitty or iTerm.
@@ -67,13 +76,16 @@ pub fn print_image_with_sixel(value: &Val) {
                     ..Default::default()
                 };
 
-                // Finally, display the image
-                if let Err(e) = print(&img, &config) {
+                // Display the image from the temporary file
+                if let Err(e) = print_from_file(temp_file_path, &config) {
                     eprintln!("Failed to print image: {:?}", e);
                 }
 
                 // Ensure we continue on a new line after printing the image
                 println!();
+
+                // Clean up the temporary file
+                let _ = std::fs::remove_file(temp_file_path);
             }
             Err(_) => {
                 eprintln!("Invalid base64 or non-image data.");
