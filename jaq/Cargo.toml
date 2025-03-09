@@ -29,5 +29,8 @@ mimalloc = { version = "0.1.29", default-features = false, optional = true }
 tempfile = "3.3.0"
 unicode-width = "0.1.13"
 yansi = "1.0.1"
-viu = { version = "1.5.1", features = ["sixel"] }
+
+# Rename the crate locally to avoid overshadowing the local "viu", if any.
+viu-lib = { package = "viu", version = "1.5.1", features = ["sixel"] }
+
 base64 = "0.22.1"

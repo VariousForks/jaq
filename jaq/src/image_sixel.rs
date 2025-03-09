@@ -1,6 +1,7 @@
 use jaq_json::Val;
 use base64::{engine::general_purpose, Engine as _};
-use viu::print_from_memory;
+// Change "viu" to "viu_lib" to match the Cargo.toml rename
+use viu_lib::print_from_memory;
 
 pub fn is_image(value: &Val) -> bool {
     // Check if the value is a string
@@ -18,7 +19,6 @@ pub fn is_image(value: &Val) -> bool {
             // TODO: implement checks for other image formats
         }
     }
-
     false
 }
 
