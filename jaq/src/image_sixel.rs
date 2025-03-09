@@ -38,6 +38,9 @@ pub fn print_image_with_sixel(value: &Val) {
         // Attempt to decode from base64
         match general_purpose::STANDARD.decode(s.as_bytes()) {
             Ok(decoded) => {
+                // Ensure we start on a new line before printing the image
+                println!();
+
                 let cursor = Cursor::new(decoded);
                 // Attempt to read the image from memory
                 let reader = match ImageReader::new(cursor).with_guessed_format() {
@@ -68,6 +71,9 @@ pub fn print_image_with_sixel(value: &Val) {
                 if let Err(e) = print(&img, &config) {
                     eprintln!("Failed to print image: {:?}", e);
                 }
+
+                // Ensure we continue on a new line after printing the image
+                println!();
             }
             Err(_) => {
                 eprintln!("Invalid base64 or non-image data.");
