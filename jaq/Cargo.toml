@@ -32,4 +32,6 @@ yansi = "1.0.1"
 
 base64 = "0.22.1"
 viuer = { version = "0.9.1", features = ["print-file", "sixel"] }
-image = { version = "0.24.9", features = [] }
+
+# Use the same version as viuer to avoid conflicting `image` versions
+image = { version = "0.25.5", features = [] }
