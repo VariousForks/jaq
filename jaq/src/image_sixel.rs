@@ -5,10 +5,15 @@ use std::io::Cursor;
 use image::io::Reader as ImageReader;
 use viuer::{print, Config};
 
+/// Checks if the provided `value` is a string containing valid base64 data and guessable image format.
+/// If it can be decoded and recognized by the `image` crate, we return `true`.
+/// 
+/// # TODO
+/// - Consider additional checks for specific formats if needed.
+/// - Possibly extend for metadata-based checks in the future.
 pub fn is_image(value: &Val) -> bool {
     // We try to decode the base64, then guess the image format.
     // If it succeeds, we consider it an image.
-    // TODO: If we need deeper checks or more robust recognition (e.g., specific format checks), add them here.
     if let Val::Str(s) = value {
         if let Ok(decoded) = general_purpose::STANDARD.decode(s.as_bytes()) {
             let cursor = Cursor::new(decoded);
@@ -22,10 +27,12 @@ pub fn is_image(value: &Val) -> bool {
     false
 }
 
-/// Prints an image in the terminal using viuer, which tries to detect Sixel, Kitty,
-/// iTerm, or fallback modes. Supports multiple formats by using the `image` crate.
-/// TODO: consider renaming this function if we support more backends in future or
-/// allow user configuration of the printing method.
+/// Prints an image in the terminal using `viuer`, which automatically tries to detect
+/// Sixel, Kitty, iTerm, or fallback modes. Supports various formats via the `image` crate.
+/// 
+/// # Future Directions / TODO:
+/// - Allow user configuration of the printing backend (Sixel, Kitty, etc.).
+/// - Possibly rename this function if more backends or configuration options become available.
 pub fn print_image_with_sixel(value: &Val) {
     if let Val::Str(s) = value {
         // Attempt to decode from base64
@@ -49,9 +56,9 @@ pub fn print_image_with_sixel(value: &Val) {
                     }
                 };
 
-                // Configure viuer. Setting use_sixel to true tries to display
-                // with Sixel if the terminal supports it. viuer can also
-                // automatically detect other capabilities like Kitty or iTerm.
+                // Configure `viuer`. Setting `use_sixel` to `true` tries to display
+                // with Sixel if the terminal supports it. `viuer` can also automatically
+                // detect other capabilities like Kitty or iTerm.
                 let config = Config {
                     use_sixel: true,
                     ..Default::default()
