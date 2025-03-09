@@ -30,7 +30,7 @@ tempfile = "3.3.0"
 unicode-width = "0.1.13"
 yansi = "1.0.1"
 
-# Rename the crate locally to avoid overshadowing the local "viu", if any.
-viu-lib = { package = "viu", version = "1.5.1", features = ["sixel"] }
+# Replace "viu" with "viuer", which actually provides a library target.
+viuer = { version = "0.4.0", features = ["sixel"] }
 
 base64 = "0.22.1"
