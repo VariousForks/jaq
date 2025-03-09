@@ -30,7 +30,5 @@ tempfile = "3.3.0"
 unicode-width = "0.1.13"
 yansi = "1.0.1"
 
-# Replace "viu" with "viuer", which actually provides a library target.
-viuer = { version = "0.4.0", features = ["sixel"] }
-
 base64 = "0.22.1"
+viuer = { version = "0.9.1", features = ["print-file", "sixel"] }
