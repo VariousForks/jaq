@@ -2,10 +2,8 @@ use jaq_json::Val;
 use base64::{engine::general_purpose, Engine as _};
 // We need to read from memory and guess the image format to support multiple formats
 use std::io::Cursor;
-use image::io::Reader as ImageReader;
+use image::ImageReader;
 use viuer::{print_from_file, Config};
-use std::fs::File;
-use std::io::Write;
 
 /// Checks if the provided `value` is a string containing valid base64 data and guessable image format.
 /// If it can be decoded and recognized by the `image` crate, we return `true`.
