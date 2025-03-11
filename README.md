@@ -102,6 +102,8 @@ Display base64-encoded images in the terminal using the `--img` flag, which enab
 
     $ jaq --img auto < examples/json_with_image_base64_png_value.json
 
+![Terminal Screenshot](examples/json_with_image_base64_png_value.json.terminal_screenshot.png)
+
 Access a field:
 
     $ echo '{"a": 1, "b": 2}' | jaq '.a'
