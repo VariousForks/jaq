@@ -512,11 +512,11 @@ init |
 
 The interpretation of `reduce`/`foreach` in jaq has the following advantages over jq:
 
-* It deals very naturally with filters that yield multiple outputs.
-  In contrast, jq discriminates outputs of `f`,
-  because it recurses only on the last of them,
-  although it outputs all of them.
-  <details><summary>Example</summary>
+  * It deals very naturally with filters that yield multiple outputs.
+    In contrast, jq discriminates outputs of `f`,
+    because it recurses only on the last of them,
+    although it outputs all of them.
+    <details><summary>Example</summary>
 
   `foreach (5, 10) as $x (1; .+$x, -.)` yields
   `6, -1, 9, 1` in jq, whereas it yields
@@ -534,8 +534,8 @@ The interpretation of `reduce`/`foreach` in jaq has the following advantages ove
   ` 6 | 10 as $x | (.+$x, -.)`.
 
   </details>
-* It makes the implementation of `reduce` and `foreach`
-  special cases of the same code, reducing the potential for bugs.
+  * It makes the implementation of `reduce` and `foreach`
+    special cases of the same code, reducing the potential for bugs.
 
 
 ## Miscellaneous
