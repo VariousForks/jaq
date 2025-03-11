@@ -73,6 +73,7 @@ pub fn print_image_with_sixel(value: &Val) {
                 // detect other capabilities like Kitty or iTerm.
                 let config = Config {
                     use_sixel: true,
+                    absolute_offset: false,
                     ..Default::default()
                 };
 
