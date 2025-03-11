@@ -98,6 +98,10 @@ The syntax is documented in the [jq manual].
 
 [jq manual]: https://jqlang.github.io/jq/manual/v1.6/
 
+Display base64-encoded images in the terminal (requires Sixel support):
+
+    $ jaq --img auto < examples/json_with_image_base64_png_value.json
+
 Access a field:
 
     $ echo '{"a": 1, "b": 2}' | jaq '.a'
@@ -223,6 +227,7 @@ Here is an overview that summarises:
 - [x] Breaking (`label $x | f | ., break $x`)
 - [x] String interpolation (`"The successor of \(.) is \(.+1)."`)
 - [x] Format strings (`@json`, `@text`, `@csv`, `@tsv`, `@html`, `@sh`, `@base64`, `@base64d`)
+- [x] Image display (`--img auto` to detect and display base64-encoded images using Sixel)
 
 
 ## Paths
